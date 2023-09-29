@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:insert="layout::head">
+<meta charset="UTF-8">
+</head>
+<body>
+	 <script th:src="@{/js/web/consola/consoles.js}" type="text/javascript"></script>
+	<nav th:insert="layout::menu"></nav>
+	<br>
+	<button type="button" id="btnagregar" class="btn btn-primary">Agregar Nueva Consola</button>
+	<br>
+	<table class="table" id="tblcategoria">
+		<thead>
+			<tr>
+				<th scope="col">Código</th>
+				<th scope="col">Nombre</th>
+				<th scope="col">Descripcion</th>
+				<th scope="col">Modelo</th>
+				<th scope="col">Year</th>
+				<th scope="col">Codigo Producto</th>
+				<th scope="col">ID Categoria</th>
+				<th scope="col">Actualizar</th>
+				<th scope="col">Eliminar</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="console :${lstConsolas}">
+			
+				<td th:text="${console.id_console}"></td>
+				<td th:text="${console.name_console}"></td>
+				<td th:text="${console.description}"></td>
+				<td th:text="${console.model}"></td>
+				<td th:text="${console.year}"></td>
+				<td th:text="${console.product.id_product}"></td>
+				<td th:text="${console.category.id}"></td>
+
+				<td>
+					<button type="button" class="btn btn-success btnactualizar"
+					th:data-idconsole="${console.id_console}"
+					th:data-nombre="${console.name_console}"
+					th:data-descripcion="${console.description}"
+					th:data-model="${console.model}"
+					th:data-year="${console.year}"
+					th:data-productid="${console.product.id_product}"
+					th:data-categoria="${console.category.id}">
+
+
+						<i class="fas fa-pen"></i>
+					</button>
+				</td>
+
+				<td>
+					<button type="button" class="btn btn-danger btneliminarcategoria"
+							th:data-idconsole="${console.id_console}"
+							th:data-nombre="${console.name_console}"
+							th:data-descripcion="${console.description}"
+							th:data-model="${console.model}"
+							th:data-year="${console.year}"
+							th:data-productid="${console.product.id_product}"
+							th:data-categoria="${console.category.id}">
+
+
+						<i class="fas fa-trash"></i>
+					</button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<!-- Modal Registro / actualizacion Consola -->
+	<div class="modal fade" id="modalConsola" tabindex="-1"
+		 aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="exampleModalLabel">Mantenimiento
+						Consolas</h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+							aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<div class="mb-3">
+						<label for="txtidconsola" class="form-label">Id</label> <input
+							type="text" class="form-control" id="txtidconsola">
+					</div>
+					<div class="mb-3">
+						<label for="txtnomconsola" class="form-label">Nombre</label> <input
+							type="text" class="form-control" id="txtnomconsola">
+					</div>
+					<div class="mb-3">
+						<label for="txtdesconsola" class="form-label">Descripcion:</label>
+						<input type="text" class="form-control" id="txtdesconsola">
+					</div>
+					<div class="mb-3">
+						<label for="txtmodelo" class="form-label">Modelo:</label> <input
+							type="text" class="form-control" id="txtmodelo">
+					</div>
+					<div class="mb-3">
+						<label for="txtanho" class="form-label">Year:</label> <input
+							type="text" class="form-control" id="txtanho">
+					</div>
+					<div class="mb-3">
+						<label for="codproducto" class="form-label">Codigo Producto:</label>
+						<input type="text" class="form-control" id="codproducto">
+					</div>
+					<div class="mb-3">
+						<label for="txtidcategoria" class="form-label">ID Categoria:</label>
+						<input type="text" class="form-control" id="txtidcategoria">
+					</div>
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+							data-bs-dismiss="modal">Cerrar</button>
+					<button type="button" class="btn btn-primary" id="btnguardar">Guardar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+</body>
+</html>

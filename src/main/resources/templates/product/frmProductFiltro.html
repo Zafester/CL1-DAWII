@@ -1,0 +1,81 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+   
+
+<!--    Datatables  -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-lite/1.1.0/material.min.css">
+   <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.material.min.css">
+
+    <title></title>
+  </head>
+  <body>
+  <center>  <h3>Consultar Producto</h3></center>
+  
+      
+   
+    
+    <table id="example" class="mdl-data-table" style="width:100%">
+        <thead>
+            <tr>
+               <th scope="col">Código</th>
+				<th scope="col">Nombre</th>
+				<th scope="col">SKU</th>
+				<th scope="col">Descripcion</th>
+				<th scope="col">Precio</th>
+				
+				<th scope="col">Stock</th>
+				<th scope="col">Creado</th>
+				<th scope="col">Editado</th>
+				<th scope="col">Categoria</th>
+            </tr>
+        </thead>
+        <tbody>
+          
+            <tr th:each="product :${lstProductos}">
+				<td th:text="${product.id_product}"></td>
+				<td th:text="${product.name}"></td>
+				<td th:text="${product.sku}"></td>
+				<td th:text="${product.description}"></td>
+				<td th:text="${product.unit_price}"></td>
+				
+				<td th:text="${product.units_in_stock}"></td>
+				<td th:text="${product.date_created}"></td>
+				<td th:text="${product.last_updated}"></td>
+				<td th:text="${product.category.id}"></td>
+			</tr>
+            
+     
+    </table>
+         
+    
+
+    <!-- Optional JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+      
+      
+<!--    Datatables-->
+<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/dataTables.material.min.js"></script>
+
+    <script>
+    $(document).ready(function() {
+    $('#example').DataTable( {
+        columnDefs: [
+            {
+                targets: [ 0, 1, 2 ],
+                className: 'mdl-data-table__cell--non-numeric'
+            }
+        ],
+        
+    } );
+} );
+    </script>
+      
+      
+  </body>
+</html>

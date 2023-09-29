@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:insert="layout::head">
+<meta charset="UTF-8">
+</head>
+<body>
+	<script th:src="@{/js/web/juego/frmjuego.js}" type="text/javascript"></script>
+	<nav th:insert="layout::menu"></nav>
+	<br>
+	<button type="button" id="btnagregar" class="btn btn-primary">
+		Agregar Juego</button>
+	<br>
+	<table class="table" id="tbljuego">
+		<thead>
+			<tr>
+				<th scope="col">Código</th>
+				<th scope="col">Nombre</th>
+				<th scope="col">Descripcion</th>
+				<th scope="col">Consola</th>
+				<th scope="col">Categoria</th>
+				<th scope="col">Plataforma</th>
+				<th scope="col">Producto</th>
+				<th scope="col">CategoriaProducto</th>
+				<th scope="col">Actualizar</th>
+				<th scope="col">Eliminar</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="games :${lstJuegos}">
+				<td th:text="${games.id_game}"></td>
+				<td th:text="${games.name}"></td>
+				<td th:text="${games.description}"></td>
+				<td th:text="${games.consoles.id_console}"></td>
+				<td th:text="${games.categories.id_category}"></td>
+				<td th:text="${games.platforms.id_platforms}"></td>
+				<td th:text="${games.product.id_product}"></td>
+				<td th:text="${games.category.id}"></td>
+				<td>
+					<button type="button" class="btn btn-success btnactualizar"
+					th:data-idgame="${games.id_game}"
+					th:data-namegame="${games.name}"
+					th:data-description="${games.description}"
+					th:data-idconsole="${games.consoles.id_console}"
+					th:data-idcategory="${games.categories.id_category}"
+					th:data-idplatforms="${games.platforms.id_platforms}"
+					th:data-idproducto="${games.product.id_product}"
+					th:data-idcategoriaproducto="${games.category.id}"
+					>
+						<i class="fas fa-pen"></i>
+					</button>
+				</td>
+				<td>
+					<button type="button" class="btn btn-danger btneliminarjuego"
+					th:data-idgame="${games.id_game}"
+					th:data-namegame="${games.name}"
+					th:data-description="${games.description}"
+					th:data-idconsole="${games.consoles.id_console}"
+					th:data-idcategory="${games.categories.id_category}"
+					th:data-idplatforms="${games.platforms.id_platforms}"
+					th:data-idproducto="${games.product.id_product}"
+					th:data-idcategoriaproducto="${games.category.id}"
+					>
+						<i class="fas fa-trash"></i>
+					</button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	
+	 <!-- Modal Registro / actualizacion juego -->
+  <div class="modal fade" id="modalJuego" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="exampleModalLabel">Modal
+						Mantenimiento de Juego</h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				
+				
+				<div class="modal-body">
+				
+				<div class="mb-3">
+						<label for="txtidjuego" class="form-label">
+							Id Juego</label> 
+						<input type="text" class="form-control"
+							id="txtidjuego" >
+					</div>
+				
+					<div class="mb-3">
+						<label for="txtnombrejuego" class="form-label">
+							Nombre Juego</label> 
+						<input type="text" class="form-control"
+							id="txtnombrejuego" >
+					</div>
+					
+					<div class="mb-3">
+						<label for="txtdescripcion" class="form-label">
+							Descripcion</label> 
+						<input type="text" class="form-control"
+							id="txtdescripcion" >
+					</div>
+					<div class="mb-3">
+						<label for="txtconsola" class="form-label">
+							Consola</label> 
+						<input type="text" class="form-control"
+							id="txtconsola" >
+					</div>
+					<div class="mb-3">
+						<label for="txtcategoria" class="form-label">
+							Categoria</label> 
+						<input type="text" class="form-control"
+							id="txtcategoria" >
+					</div>
+					<div class="mb-3">
+						<label for="txtplataforma" class="form-label">
+							Plataforma</label> 
+						<input type="text" class="form-control"
+							id="txtplataforma" >
+					</div>
+					<div class="mb-3">
+						<label for="txtproducto" class="form-label">
+							Producto</label> 
+						<input type="text" class="form-control"
+							id="txtproducto" >
+					</div>
+					<div class="mb-3">
+						<label for="txtcategoriaproducto" class="form-label">
+							CategoriaProducto</label> 
+						<input type="text" class="form-control"
+							id="txtcategoriaproducto" >
+					</div>
+									
+					<input type="hidden" id="hddidregistrojuego">
+				</div>
+				
+				
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-bs-dismiss="modal">Cerrar</button>
+					<button type="button" class="btn btn-primary"
+						id="btnguardar">Guardar</button>
+				</div>
+				
+				
+			</div>
+		</div>
+	</div>
+
+
+
+
+<!-- Modal Eliminar Juego -->
+	<div class="modal fade" id="modalEliminarJuego" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="exampleModalLabel">Modal
+						Eliminar Juego</h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				<div class="modal-body">		
+					<label id="mensajeeliminar"></label>
+					<input type="hidden" id="hddideliminarjuego"
+						value="0">
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-bs-dismiss="modal">Cerrar</button>
+					<button type="button" class="btn btn-primary"
+						id="btneliminar">Eliminar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+</body>
+</html>
